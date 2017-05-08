@@ -18,8 +18,22 @@ public class Vaisseau {
 	}
 
 	public boolean occupeLaPosition(int x, int y) {
-		return (this.x==x) && (this.y==y);
+		return (this.x == x) && (this.y == y);
 	}
 	
-	
+	public void seDeplacerVersLaDroite() {
+		// TODO Auto-generated method stub
+		 this.x = this.x + 1 ;
+	}
+
+	public int abscisse() {
+		// TODO Auto-generated method stub
+		return x;
+	}
+
+	public void seDeplacerVersLaGauche() {
+		// TODO Auto-generated method stub
+		this.x = this.x - 1 ;
+	}
+
 }

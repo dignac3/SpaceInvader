@@ -4,37 +4,47 @@ import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
 
 public class SpaceInvaders {
 
-		private static final char MARQUE_VIDE = '.';
-		private static final char MARQUE_VAISEEAU = 'V';
-		int longueur;
-		int hauteur;
-		Vaisseau vaisseau;
-		
-		public SpaceInvaders(int longueur, int hauteur) {
+	private static final char MARQUE_VIDE = '.';
+	private static final char MARQUE_VAISEEAU = 'V';
+	int longueur;
+	int hauteur;
+	Vaisseau vaisseau;
+
+	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
 		this.hauteur = hauteur;
-   }
-		    
-	public void positionnerUnNouveauVaisseau(int x, int y) {
-		if (x >= longueur)
+	}
+
+public void positionnerUnNouveauVaisseau(int x, int y) {
+		
+		if (!estDansEspaceJeu(x, y))
 			throw new HorsEspaceJeuException("Vous êtes en dehors de l'espace jeu");
 		
-       this.vaisseau = new Vaisseau (x,y);
+		vaisseau = new Vaisseau(x, y); 
+
+
 	}
-	
+
+
+public boolean estDansEspaceJeu(int x, int y) {
+	return (x >= 0) && (x < longueur) && (y >= 0) && (y < hauteur);
+}
+
 	@Override
 	public String toString() {
+		return recupererEspaceJeuDansChaineASCII();
+	}
+
+	public String recupererEspaceJeuDansChaineASCII() {
 		StringBuilder espaceDeJeu = new StringBuilder();
-		
-		
+
 		for (int y = 0; y < hauteur; y++) {
 			for (int x = 0; x < longueur; x++) {
-				 espaceDeJeu.append(recupererMarqueDeLaPosition(x, y));
+				espaceDeJeu.append(recupererMarqueDeLaPosition(x, y));
 			}
 			espaceDeJeu.append("\n");
 		}
-		
-		
+
 		return espaceDeJeu.toString();
 	}
 
@@ -45,24 +55,35 @@ public class SpaceInvaders {
 	 */
 	public char recupererMarqueDeLaPosition(int x, int y) {
 		char marque;
-		 
-			if (this.aUnVaisseauQuiOccupeLaPosition(x, y))
-			      marque=MARQUE_VAISEEAU;
-		    else
-			      marque=MARQUE_VIDE;
+
+		if (this.aUnVaisseauQuiOccupeLaPosition(x, y))
+			marque = MARQUE_VAISEEAU;
+		else
+			marque = MARQUE_VIDE;
 		return marque;
 	}
 
 	private boolean aUnVaisseauQuiOccupeLaPosition(int x, int y) {
-		
-		return this.aUnVaisseau() && vaisseau.occupeLaPosition( x, y);
-			
+
+		return this.aUnVaisseau() && vaisseau.occupeLaPosition(x, y);
+
 	}
 
 	/**
 	 * @return
 	 */
 	public boolean aUnVaisseau() {
-		return vaisseau!=null;
+		return vaisseau != null;
 	}
+
+	public void deplacerVaisseauVersLaDroite() {
+		   if (vaisseau.abscisse()< (longueur-1)) vaisseau.seDeplacerVersLaDroite();
+	    }
+
+	public void deplacerVaisseauVersLaGauche() {
+		if (vaisseau.abscisse()> 0) vaisseau.seDeplacerVersLaGauche();
+	}
+	
+	
+	
 }
