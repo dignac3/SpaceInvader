@@ -3,6 +3,8 @@
  */
 package fr.unilim.iut.spaceinvaders;
 
+import moteurjeu.Commande;
+
 /**
  * @author doria
  *
@@ -34,6 +36,11 @@ public class Vaisseau {
 	public void seDeplacerVersLaGauche() {
 		// TODO Auto-generated method stub
 		this.x = this.x - 1 ;
+	}
+
+	public void deplacer(Commande commande) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

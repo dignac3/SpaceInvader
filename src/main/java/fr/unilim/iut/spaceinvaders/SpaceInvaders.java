@@ -91,7 +91,7 @@ public boolean estDansEspaceJeu(int x, int y) {
 	}
 
 	@Override
-	public void evoluer(Commande commandeUser) {
+	public void evoluer(Commande commande) {
 		// TODO Auto-generated method stub
 		this.getVaisseau().deplacer(commande);
 	}
