@@ -71,7 +71,8 @@ public boolean estDansEspaceJeu(int x, int y) {
 	}
 
 	public void deplacerVaisseauVersLaGauche() {
-		if (vaisseau.abscisseLaPlusAGauche()> 0) vaisseau.seDeplacerVersLaGauche();
+		if (vaisseau.abscisseLaPlusAGauche() > 0)
+			vaisseau.seDeplacerVersLaGauche();
 	}
 
 	public void positionnerUnNouveauVaisseau(int longueur, int hauteur, int x, int y) {

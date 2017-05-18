@@ -26,10 +26,7 @@ public class Vaisseau {
 	}
 
 	public boolean occupeLaPosition(int x, int y) {
-		if (estAbscisseCouverte(x) && estOrdonneeCouverte(y))
-			return true;
-
-		return false;
+		return (estAbscisseCouverte(x) && estOrdonneeCouverte(y));
 	}
 
 	public boolean estOrdonneeCouverte(int y) {
