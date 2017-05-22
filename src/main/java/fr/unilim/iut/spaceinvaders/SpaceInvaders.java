@@ -1,8 +1,10 @@
 package fr.unilim.iut.spaceinvaders;
 
 import fr.unilim.iut.spaceinvaders.utils.HorsEspaceJeuException;
+import moteurjeu.Commande;
+import moteurjeu.Jeu;
 
-public class SpaceInvaders {
+public class SpaceInvaders implements Jeu{
 
 	private static final char MARQUE_VIDE = '.';
 	private static final char MARQUE_VAISEEAU = 'V';
@@ -25,6 +27,10 @@ public void positionnerUnNouveauVaisseau(int x, int y) {
 
 	}
 
+
+public Vaisseau getVaisseau() {
+	return vaisseau;
+}
 
 public boolean estDansEspaceJeu(int x, int y) {
 	return (x >= 0) && (x < longueur) && (y >= 0) && (y < hauteur);
@@ -82,6 +88,18 @@ public boolean estDansEspaceJeu(int x, int y) {
 
 	public void deplacerVaisseauVersLaGauche() {
 		if (vaisseau.abscisse()> 0) vaisseau.seDeplacerVersLaGauche();
+	}
+
+	@Override
+	public void evoluer(Commande commande) {
+		// TODO Auto-generated method stub
+		this.getVaisseau().deplacer(commande);
+	}
+
+	@Override
+	public boolean etreFini() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	
