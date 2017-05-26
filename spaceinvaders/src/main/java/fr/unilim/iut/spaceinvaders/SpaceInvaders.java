@@ -79,7 +79,7 @@ public class SpaceInvaders {
 
 	public void deplacerVaisseauVersLaDroite() {
 		if (vaisseau.abscisseLaPlusADroite() < (longueur - 1)) {
-			vaisseau.seDeplacerVersLaDroite();
+			vaisseau.deplacerHorizontalementVers(Direction.DROITE);
 			if (!estDansEspaceJeu(vaisseau.abscisseLaPlusADroite(), vaisseau.ordonneeLaPlusHaute())) {
 				vaisseau.positionner(longueur - vaisseau.longueur(), vaisseau.ordonneeLaPlusHaute());
 			}
@@ -88,7 +88,7 @@ public class SpaceInvaders {
 
 	public void deplacerVaisseauVersLaGauche() {
 		if (0 < vaisseau.abscisseLaPlusAGauche())
-			vaisseau.seDeplacerVersLaGauche();
+			vaisseau.deplacerHorizontalementVers(Direction.GAUCHE);
 		if (!estDansEspaceJeu(vaisseau.abscisseLaPlusAGauche(), vaisseau.ordonneeLaPlusHaute())) {
 			vaisseau.positionner(0, vaisseau.ordonneeLaPlusHaute());
 		}
@@ -122,6 +122,14 @@ public class SpaceInvaders {
 					"Pas assez de hauteur libre entre le vaisseau et le haut de l'espace jeu pour tirer le missile");
 
 		this.missile = this.vaisseau.tirerUnMissile(dimensionMissile, vitesseMissile);
+	}
+
+	public void deplacerMissile() {
+		// TODO Auto-generated method stub
+		missile.deplacerVerticalementVers(Direction.HAUT_ECRAN);
+		if (0>missile.ordonneeLaPlusBasse()) {
+			missile = null;
+		}
 	}
 
 }
