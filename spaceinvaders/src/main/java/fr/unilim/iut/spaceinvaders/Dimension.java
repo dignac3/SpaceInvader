@@ -17,4 +17,4 @@ public class Dimension {
 		return this.hauteur;
 	}
 
-}   
+}
