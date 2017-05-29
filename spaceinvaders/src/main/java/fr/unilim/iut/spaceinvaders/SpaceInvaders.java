@@ -10,6 +10,7 @@ public class SpaceInvaders {
 	int hauteur;
 	Vaisseau vaisseau;
 	Missile missile;
+	Envahisseur envahisseur;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -49,19 +50,28 @@ public class SpaceInvaders {
 			marque = Constante.MARQUE_VAISSEAU;
 		else if (this.aUnMissileQuiOccupeLaPosition(x, y))
 			marque = Constante.MARQUE_MISSILE;
+		else if (this.aUnEnvahisseurQuiOccupeLaPosition(x, y))
+			marque = Constante.MARQUE_ENVAHISSEUR;
 		else
 			marque = Constante.MARQUE_VIDE;
 		return marque;
 	}
 
 	private boolean aUnMissileQuiOccupeLaPosition(int x, int y) {
-		// TODO Auto-generated method stub
 		return this.aUnMissile() && missile.occupeLaPosition(x, y);
 	}
 
 	private boolean aUnMissile() {
-		// TODO Auto-generated method stub
 		return missile != null;
+	}
+	
+	private boolean aUnEnvahisseurQuiOccupeLaPosition(int x, int y) {
+		return this.aUnEnvahisseur() && envahisseur.occupeLaPosition(x, y);
+	}
+
+	private boolean aUnEnvahisseur() {
+		
+		return envahisseur != null;
 	}
 
 	private boolean aUnVaisseauQuiOccupeLaPosition(int x, int y) {
@@ -70,9 +80,6 @@ public class SpaceInvaders {
 
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean aUnVaisseau() {
 		return vaisseau != null;
 	}
@@ -131,5 +138,46 @@ public class SpaceInvaders {
 			missile = null;
 		}
 	}
+
+	public void deplacerEnvahisseurVersLaDroite() {
+		// TODO Auto-generated method stub
+		envahisseur.deplacerHorizontalementVers(Direction.DROITE);
+	}
+	
+	public void deplacerEnvahisseurVersLaGauche() {
+		// TODO Auto-generated method stub
+		envahisseur.deplacerHorizontalementVers(Direction.GAUCHE);
+	}
+
+	public void deplacerEnvahisseur() {
+		if (0 == envahisseur.abscisseLaPlusAGauche())
+			envahisseur.setDirection(Direction.DROITE);
+		else if(longueur - 1 == envahisseur.abscisseLaPlusADroite())
+			envahisseur.setDirection(Direction.GAUCHE);
+		envahisseur.deplacerHorizontalementVers(envahisseur.getDirection());
+	}
+
+	public void positionnerUnNouvelEnvahisseur(Dimension dimension, Position position, int vitesse, Direction direction) {
+		// TODO Auto-generated method stub
+				int x = position.abscisse();
+				int y = position.ordonnee();
+
+				if (!estDansEspaceJeu(x, y))
+					throw new HorsEspaceJeuException("La position de l'envahisseur est en dehors de l'espace jeu");
+
+				int longueurVaisseau = dimension.longueur();
+				int hauteurVaisseau = dimension.hauteur();
+
+				if (!estDansEspaceJeu(x + longueurVaisseau - 1, y))
+					throw new DebordementEspaceJeuException(
+							"L'envahisseur déborde de l'espace jeu vers la droite à cause de sa longueur");
+				if (!estDansEspaceJeu(x, y - hauteurVaisseau + 1))
+					throw new DebordementEspaceJeuException(
+							"L'envahisseur déborde de l'espace jeu vers le bas à cause de sa hauteur");
+
+				envahisseur = new Envahisseur(position, dimension, vitesse, direction);
+		
+	}
+	
 
 }
